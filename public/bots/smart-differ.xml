@@ -1,0 +1,115 @@
+<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+  <block type="timeout" id="9Bsr3nh72FlwWthV^m@," disabled="true" x="-446" y="-69"></block>
+  <block type="trade_definition" id="?|R!^66CW;K.Vy1UKK8C" deletable="false" x="0" y="60">
+    <statement name="TRADE_OPTIONS">
+      <block type="trade_definition_market" id=")hn=?zH4qF~,a{g?.GN3" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">jump_index</field>
+        <field name="SYMBOL_LIST">JD10</field>
+        <next>
+          <block type="trade_definition_tradetype" id="L_}2weu5s(D;j4s]Ku6!" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">matchesdiffers</field>
+            <next>
+              <block type="trade_definition_contracttype" id="ZyBnNP!4.kDJdL?AEkmp" deletable="false" movable="false">
+                <field name="TYPE_LIST">both</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id="!K)dplO1_PrcGJqbss?e" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="J2-Huwr$}1iLuKDg-ns{" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id="u:j,O2M?g(RElhq4)p6." deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="SUBMARKET">
+      <block type="trade_definition_tradeoptions" id="?D-S8*CIhkRPEtEz5^PH">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+        <field name="DURATIONTYPE_LIST">t</field>
+        <value name="DURATION">
+          <shadow type="math_number_positive" id="SL,/lYrfFMBUa+2WaKw$">
+            <field name="NUM">2</field>
+          </shadow>
+        </value>
+        <value name="AMOUNT">
+          <shadow type="math_number_positive" id="fk3`}dRGB.]sdl4[j?|R">
+            <field name="NUM">0.52</field>
+          </shadow>
+        </value>
+        <value name="PREDICTION">
+          <shadow type="math_number_positive" id=";)=B?3_Jd1cVFH[+0(IY" inline="true">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="during_purchase" id="kAKlilT^sLtlqIsW@1W)" x="714" y="60">
+    <statement name="DURING_PURCHASE_STACK">
+      <block type="controls_if" id="$NLhRy=Sq^rYeS!0R.LG">
+        <value name="IF0">
+          <block type="check_sell" id="_7irS~4J;];Ks-hG*|-y"></block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="after_purchase" id="4Q}cCsFv|mN3*4N/sM3q" x="714" y="292">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="tick_delay" id="=jq]?dCO*Gc,G$+L;OlM">
+        <statement name="TICKDELAYSTACK">
+          <block type="controls_if" id="0r?}!#8vM5/gkA|l~9%I">
+            <value name="IF0">
+              <block type="contract_check_result" id="qjuHU!Nh2OhC;VEf78cO">
+                <field name="CHECK_RESULT">win</field>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="trade_again" id="J1BM?KqtyEv,y)l0cPUJ"></block>
+            </statement>
+          </block>
+        </statement>
+        <value name="TICKDELAYVALUE">
+          <block type="math_number" id=";y#Qv]-p+ES,i_:p`vrL">
+            <field name="NUM">11</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="before_purchase" id="_yc%gP#M36_`VC3QcQ)s" deletable="false" x="0" y="658">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="controls_if" id="T{`0)$c~5ApKUXV@|_S)">
+        <value name="IF0">
+          <block type="logic_compare" id="ZIn/u][y|Pe#JS`bcAX*">
+            <field name="OP">EQ</field>
+            <value name="A">
+              <block type="last_digit" id="Zt42_*(,4)wU2Ng[rr-f"></block>
+            </value>
+            <value name="B">
+              <block type="math_number" id="Y[[x,cM.LxZ+-[w#wiM6">
+                <field name="NUM">2</field>
+              </block>
+            </value>
+          </block>
+        </value>
+        <statement name="DO0">
+          <block type="purchase" id="YX4A;?(oQLTlp2elR88H">
+            <field name="PURCHASE_LIST">DIGITDIFF</field>
+          </block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>
