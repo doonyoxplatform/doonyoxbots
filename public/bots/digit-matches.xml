@@ -1,0 +1,85 @@
+<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+  <block type="trade_definition" id="DM^trade_definition" deletable="false" x="0" y="60">
+    <statement name="TRADE_OPTIONS">
+      <block type="trade_definition_market" id="DM^market" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">jump_index</field>
+        <field name="SYMBOL_LIST">JD10</field>
+        <next>
+          <block type="trade_definition_tradetype" id="DM^tradetype" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">matchesdiffers</field>
+            <next>
+              <block type="trade_definition_contracttype" id="DM^contract" deletable="false" movable="false">
+                <field name="TYPE_LIST">both</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id="DM^interval" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="DM^restart" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id="DM^restarterror" deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="SUBMARKET">
+      <block type="trade_definition_tradeoptions" id="DM^options">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+        <field name="DURATIONTYPE_LIST">t</field>
+        <value name="DURATION">
+          <shadow type="math_number_positive" id="DM^duration"><field name="NUM">2</field></shadow>
+        </value>
+        <value name="AMOUNT">
+          <shadow type="math_number_positive" id="DM^amount"><field name="NUM">1</field></shadow>
+        </value>
+        <value name="PREDICTION">
+          <shadow type="math_number_positive" id="DM^prediction" inline="true"><field name="NUM">5</field></shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="during_purchase" id="DM^during" x="714" y="60">
+    <statement name="DURING_PURCHASE_STACK">
+      <block type="controls_if" id="DM^sellsif">
+        <value name="IF0">
+          <block type="check_sell" id="DM^sells"></block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="after_purchase" id="DM^after" x="714" y="292">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="tick_delay" id="DM^tickdelay">
+        <statement name="TICKDELAYSTACK">
+          <block type="controls_if" id="DM^ifwin">
+            <value name="IF0">
+              <block type="contract_check_result" id="DM^reswin"><field name="CHECK_RESULT">win</field></block>
+            </value>
+            <statement name="DO0">
+              <block type="trade_again" id="DM^again"></block>
+            </statement>
+          </block>
+        </statement>
+        <value name="TICKDELAYVALUE">
+          <block type="math_number" id="DM^ticks"><field name="NUM">11</field></block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="before_purchase" id="DM^before" deletable="false" x="0" y="658">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="purchase" id="DM^purchase"><field name="PURCHASE_LIST">DIGITMATCH</field></block>
+    </statement>
+  </block>
+</xml>
