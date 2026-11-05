@@ -36,7 +36,7 @@ export default class RootStore {
     public toolbar: ToolbarStore;
     public toolbox: ToolboxStore;
     public quick_strategy: QuickStrategyStore;
-
+    public scanner: ScannerStore;
     public dashboard: DashboardStore;
 
     public chart_store: ChartStore;
