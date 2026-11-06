@@ -1,0 +1,103 @@
+<xml xmlns="https://developers.google.com/blockly/xml" is_dbot="true" collection="false">
+  <block type="variables" id="EOA^vars">
+    <variable>eo_side</variable>
+  </block>
+  <block type="trade_definition" id="EOA^trade_definition" deletable="false" x="0" y="60">
+    <statement name="TRADE_OPTIONS">
+      <block type="trade_definition_market" id="EOA^market" deletable="false" movable="false">
+        <field name="MARKET_LIST">synthetic_index</field>
+        <field name="SUBMARKET_LIST">jump_index</field>
+        <field name="SYMBOL_LIST">JD10</field>
+        <next>
+          <block type="trade_definition_tradetype" id="EOA^tradetype" deletable="false" movable="false">
+            <field name="TRADETYPECAT_LIST">digits</field>
+            <field name="TRADETYPE_LIST">odd/even</field>
+            <next>
+              <block type="trade_definition_contracttype" id="EOA^contract" deletable="false" movable="false">
+                <field name="TYPE_LIST">both</field>
+                <next>
+                  <block type="trade_definition_candleinterval" id="EOA^interval" deletable="false" movable="false">
+                    <field name="CANDLEINTERVAL_LIST">60</field>
+                    <next>
+                      <block type="trade_definition_restartbuysell" id="EOA^restart" deletable="false" movable="false">
+                        <field name="TIME_MACHINE_ENABLED">FALSE</field>
+                        <next>
+                          <block type="trade_definition_restartonerror" id="EOA^restarterror" deletable="false" movable="false">
+                            <field name="RESTARTONERROR">TRUE</field>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <statement name="SUBMARKET">
+      <block type="trade_definition_tradeoptions" id="EOA^options">
+        <mutation xmlns="http://www.w3.org/1999/xhtml" has_first_barrier="false" has_second_barrier="false" has_prediction="true"></mutation>
+        <field name="DURATIONTYPE_LIST">t</field>
+        <value name="DURATION">
+          <shadow type="math_number_positive" id="EOA^duration"><field name="NUM">5</field></shadow>
+        </value>
+        <value name="AMOUNT">
+          <shadow type="math_number_positive" id="EOA^amount"><field name="NUM">1</field></shadow>
+        </value>
+        <value name="PREDICTION">
+          <shadow type="math_number_positive" id="EOA^prediction" inline="true"><field name="NUM">1</field></shadow>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="during_purchase" id="EOA^during" x="714" y="60">
+    <statement name="DURING_PURCHASE_STACK">
+      <block type="controls_if" id="EOA^sellsif">
+        <value name="IF0">
+          <block type="check_sell" id="EOA^sells"></block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="after_purchase" id="EOA^after" x="714" y="292">
+    <statement name="AFTERPURCHASE_STACK">
+      <block type="tick_delay" id="EOA^tickdelay">
+        <statement name="TICKDELAYSTACK">
+          <block type="controls_if" id="EOA^ifwin">
+            <value name="IF0">
+              <block type="contract_check_result" id="EOA^reswin"><field name="CHECK_RESULT">win</field></block>
+            </value>
+            <statement name="DO0">
+              <block type="variables_set" id="EOA^flipside">
+                <field name="VAR">eo_side</field>
+                <value name="VALUE">
+                  <block type="logic_boolean" id="EOA^b1"><field name="BOOL">FALSE</field></block>
+                </value>
+              </block>
+            </statement>
+          </block>
+        </statement>
+        <value name="TICKDELAYVALUE">
+          <block type="math_number" id="EOA^ticks"><field name="NUM">11</field></block>
+        </value>
+      </block>
+    </statement>
+  </block>
+  <block type="before_purchase" id="EOA^before" deletable="false" x="0" y="658">
+    <statement name="BEFOREPURCHASE_STACK">
+      <block type="controls_if" id="EOA^sideif">
+        <value name="IF0">
+          <block type="variables_get" id="EOA^sideget"><field name="VAR">eo_side</field></block>
+        </value>
+        <statement name="DO0">
+          <block type="purchase" id="EOA^buyodd"><field name="PURCHASE_LIST">DIGITODD</field></block>
+        </statement>
+        <statement name="ELSE">
+          <block type="purchase" id="EOA^buyeven"><field name="PURCHASE_LIST">DIGITEVEN</field></block>
+        </statement>
+      </block>
+    </statement>
+  </block>
+</xml>

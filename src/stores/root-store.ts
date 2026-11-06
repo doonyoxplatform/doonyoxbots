@@ -14,6 +14,7 @@ import LoadModalStore from './load-modal-store';
 import QuickStrategyStore from './quick-strategy-store';
 import RunPanelStore from './run-panel-store';
 import SaveModalStore from './save-modal-store';
+import ScannerStore from './scanner-store';
 import SummaryCardStore from './summary-card-store';
 import ToolbarStore from './toolbar-store';
 import ToolboxStore from './toolbox-store';
@@ -77,6 +78,8 @@ export default class RootStore {
         this.toolbar = new ToolbarStore(this);
         this.toolbox = new ToolboxStore(this, this.core);
         this.quick_strategy = new QuickStrategyStore(this);
+
+        this.scanner = new ScannerStore(this);
 
         this.dashboard = new DashboardStore(this, this.core);
 

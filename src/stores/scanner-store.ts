@@ -95,17 +95,17 @@ export default class ScannerStore {
         // Build per-bot runtime state from the registry.
         ALL_BOTS.forEach(bot => {
             const reg = ALL_BOTS.find((b: any) => b.id === bot.id) as any;
-            const b = this.bots[bot.id];
-            b.state = 'IDLE';
-            b.armed = false;
-            b.scanning = false;
-            b.digit = bot.requiresDigit ? null : bot.digit;
-            b.parity = bot.parity || 'odd' as any;
-            b.prediction = reg.prediction;
-            b.parity = reg.parity || 'odd';
-            b.stake = reg.stake || 1;
-            b.pnl = 0;
-            b.trades = 0;
+            const b = {
+                state: 'IDLE',
+                armed: false,
+                scanning: false,
+                digit: bot.requiresDigit ? null : null,
+                parity: reg.parity || 'odd',
+                prediction: reg.parity || null,
+                stake: reg.stake || 1,
+                pnl: 0,
+                trades: 0,
+            };
             this.bots[bot.id] = b;
         });
     }

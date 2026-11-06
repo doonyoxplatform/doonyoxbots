@@ -76,7 +76,9 @@
   </block>
   <block type="before_purchase" id="RF^before" deletable="false" x="0" y="658">
     <statement name="BEFOREPURCHASE_STACK">
-      <block type="purchase" id="RF^purchase"><field name="PURCHASE_LIST">PUT</field></block>
+      <block type="purchase" id="RF^purchase">
+        <field name="PURCHASE_LIST">PUT</field>
+      </block>
     </statement>
   </block>
 </xml>
